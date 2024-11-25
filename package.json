@@ -11,7 +11,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-router": "^0.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.2",
+    "perfect-payload": "^1.0.8"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.7"
   }
 }
