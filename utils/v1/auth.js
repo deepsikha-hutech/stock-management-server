@@ -10,7 +10,6 @@ export async function loginUserUtil(email, password) {
     const userDBCRUD = new DBCRUD("users");
     await userDBCRUD.initialize();
     const user = await userDBCRUD.findOne({ email, password });
-    console.log(user);
 
     if (user) {
       const { password, ...userInfo } = user;

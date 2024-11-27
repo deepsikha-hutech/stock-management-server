@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 const privateKey = process.env.JWT_PRIVATE_KEY;
 
 export async function createToken(userInfo) {

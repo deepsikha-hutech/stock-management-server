@@ -1,10 +1,8 @@
 import express from "express";
 const router = express.Router();
 import { signupUserUtil, loginUserUtil } from "../../utils/v1/auth.js";
-import { validatePayload } from "../../utils/v1/middleware.js";
-import { SIGNUP_RULE, LOGIN_RULE } from "../../utils/v1/validationrules.js";
+import { verifyUserToken } from "../../utils/v1/middleware.js";
 
-// router.post("/signup", validatePayload({ rule: SIGNUP_RULE }), signupUser);
 router.post("/signup");
 export async function signupUser(req, res) {
   try {
@@ -18,15 +16,6 @@ export async function signupUser(req, res) {
   }
 }
 
-// router.post(
-//   "/signup",
-
-//   validatePayload({ rule: SIGNUP_RULE }),
-//   async (req, res) => {
-
-//   }
-// );
-// router.post("/login", validatePayload({ rule: LOGIN_RULE }), loginUser);
 router.post("/login");
 export async function loginUser(req, res) {
   const { email, password } = req?.body;
