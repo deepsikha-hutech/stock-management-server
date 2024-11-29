@@ -11,6 +11,7 @@ import {
 import {
   createStock,
   deleteStockbyId,
+  togggleStockStatus,
   updateStockbyId,
 } from "../../controller/v1/stock.js";
 import { getStockbyId } from "../../controller/v1/stock.js";
@@ -31,5 +32,7 @@ router.get("/:id", getStockbyId);
 router.get("/", getAllStocks);
 
 router.delete("/:id", deleteStockbyId);
+router.put("/:id/:status", togggleStockStatus);
+// router.get("/import", downloadStockResource );
 
 export default router;

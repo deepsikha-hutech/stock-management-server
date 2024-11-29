@@ -3,6 +3,8 @@ const ObjectId = Types.ObjectId;
 
 import { DBCRUD } from "../dbcrud.js";
 
+// import { parser } from "json2csv";
+
 export async function createStockUtil(stockinfo) {
   try {
     const stockDBCRUD = new DBCRUD("userstocks");
@@ -165,3 +167,44 @@ export async function deleteStockbyIdUtil(id) {
     };
   }
 }
+
+export async function togggleStockStatusUtil(id, status) {
+  try {
+    const stockDBCRUD = new DBCRUD("userstocks");
+    await stockDBCRUD.initialize();
+    const { acknowledged, modifiedCount, matchedCount } =
+      await stockDBCRUD.updateById(id, { status: status == "active" });
+    if (acknowledged && matchedCount) {
+      return {
+        statusCode: 200,
+        stockinfo: { status: status == "active", _id: id },
+        message: "stock status updated successfully",
+      };
+    } else if (matchedCount === 0) {
+      return {
+        statusCode: 400,
+        message: "stock not found",
+      };
+    } else {
+      return {
+        statusCode: 500,
+        message: "something went wrong",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      statusCode: 500,
+      message: "something went wrong",
+      errors: [error.message],
+    };
+  }
+}
+
+// export const downloadStockResource = (res, filename, fields, data) => {
+//   const json2csv = new parser({ fields });
+//   const csv = json2csv.parse(data);
+//   res.header("Content-Type", "text/csv");
+//   res.attachment(filename);
+//   return res.send(csv);
+// };

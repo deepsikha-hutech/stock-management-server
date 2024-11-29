@@ -56,7 +56,7 @@ export const UPDATE_STOCK_RULE = {
   status: {
     allowNull: false,
     type: "boolean",
-    message: "Status must be either active(true) or inactive(false)",
+    message: "Status must be either Active(true) or Inactive(false)",
     allowedValues: [true, false],
   },
 
