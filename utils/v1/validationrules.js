@@ -39,3 +39,103 @@ export const SIGNUP_RULE = {
     message: "Please enter a password",
   },
 };
+
+export const UPDATE_STOCK_RULE = {
+  customerid: {
+    mandatory: true,
+    allowNull: false,
+    type: "string",
+    message: "Please enter a customerid",
+  },
+  name: {
+    mandatory: true,
+    allowNull: false,
+    type: "string",
+    message: "Please enter a name",
+  },
+  status: {
+    allowNull: false,
+    type: "boolean",
+    message: "Status must be either Active(true) or Inactive(false)",
+    allowedValues: [true, false],
+  },
+
+  riskprofile: {
+    type: "string",
+    allowNull: false,
+  },
+  portfoliovalue: {
+    type: "number",
+    allowNull: false,
+  },
+  sipamount: {
+    type: "number",
+    allowNull: false,
+  },
+  adhocinv: {
+    type: "number",
+    allowNull: false,
+  },
+  modelportfolio: {
+    type: "string",
+    allowNull: false,
+  },
+  thematicinv: {
+    type: "string",
+    allowNull: false,
+  },
+  lastupdated: {
+    type: "string",
+    allowNull: false,
+  },
+};
+
+export const NEW_STOCK_RULE = {
+  customerid: {
+    mandatory: true,
+    allowNull: false,
+    type: "string",
+    message: "Please enter a customerid",
+  },
+  name: {
+    mandatory: true,
+    allowNull: false,
+    type: "string",
+    message: "Please enter a name",
+  },
+  status: {
+    allowNull: false,
+    type: "boolean",
+    message: "Status must be either active(true) or inactive(false)",
+    allowedValues: [true, false],
+  },
+
+  riskprofile: {
+    type: "string",
+    allowNull: false,
+  },
+  portfoliovalue: {
+    type: "number",
+    allowNull: false,
+  },
+  sipamount: {
+    type: "number",
+    allowNull: false,
+  },
+  adhocinv: {
+    type: "number",
+    allowNull: false,
+  },
+  modelportfolio: {
+    type: "string",
+    allowNull: false,
+  },
+  thematicinv: {
+    type: "string",
+    allowNull: false,
+  },
+  lastupdated: {
+    type: "string",
+    allowNull: false,
+  },
+};
