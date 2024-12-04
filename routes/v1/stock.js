@@ -1,7 +1,7 @@
-import { validatePayload } from "../../utils/v1/middleware.js";
-// import { updateUserbyId } from "../../controller/v1/auth.js";
-// import { updateUser } from "../../controller/v1/auth.js";
-
+import {
+  uploadFileMiddleware,
+  validatePayload,
+} from "../../utils/v1/middleware.js";
 import express from "express";
 
 import {
@@ -11,6 +11,8 @@ import {
 import {
   createStock,
   deleteStockbyId,
+  exportStocks,
+  importStocks,
   togggleStockStatus,
   updateStockbyId,
 } from "../../controller/v1/stock.js";
@@ -27,12 +29,15 @@ router.put(
   updateStockbyId
 );
 
+router.get("/export", exportStocks);
+
 router.get("/:id", getStockbyId);
 
 router.get("/", getAllStocks);
 
 router.delete("/:id", deleteStockbyId);
 router.put("/:id/:status", togggleStockStatus);
-// router.get("/import", downloadStockResource );
+
+router.post("/import", uploadFileMiddleware, importStocks);
 
 export default router;

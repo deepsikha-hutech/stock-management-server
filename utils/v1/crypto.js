@@ -5,7 +5,7 @@ const privateKey = process.env.JWT_PRIVATE_KEY;
 
 export async function createToken(userInfo) {
   return new Promise((resolve, reject) => {
-    jwt.sign(userInfo, privateKey, { expiresIn: "24h" }, (err, token) => {
+    jwt.sign(userInfo, privateKey, { expiresIn: "7d" }, (err, token) => {
       if (err) {
         reject(err);
       } else {

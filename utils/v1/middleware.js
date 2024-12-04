@@ -1,5 +1,8 @@
 import { verifyToken } from "./crypto.js";
 import { perfectPayloadV1 } from "perfect-payload";
+import multer from "multer";
+
+const upload = multer({ dest: "uploads/" });
 
 export async function verifyUserToken(req, res, next) {
   const token = req.headers.authorization;
@@ -28,4 +31,14 @@ export const validatePayload = ({ rule }) => {
       next();
     } else res.status(statusCode).json(response);
   };
+};
+
+export const uploadFileMiddleware = upload.single("data");
+uploadFileMiddleware.errorHandler = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    res.status(400).json({ message: "File upload error: " + err.message });
+  } else {
+    res.status(500).json({ message: "Internal server error" });
+  }
+  next();
 };

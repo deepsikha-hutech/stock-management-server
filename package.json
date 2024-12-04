@@ -12,12 +12,14 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-router": "^0.0.1",
     "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.2",
+    "multer": "^1.4.5-lts.1",
     "perfect-payload": "^1.0.8"
   },
   "devDependencies": {

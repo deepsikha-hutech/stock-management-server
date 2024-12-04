@@ -2,6 +2,8 @@ import { Types } from "mongoose";
 const ObjectId = Types.ObjectId;
 
 import { DBCRUD } from "../dbcrud.js";
+// import fs from "fs";
+// import csv from "csv-parser";
 
 // import { parser } from "json2csv";
 
@@ -201,10 +203,58 @@ export async function togggleStockStatusUtil(id, status) {
   }
 }
 
-// export const downloadStockResource = (res, filename, fields, data) => {
-//   const json2csv = new parser({ fields });
-//   const csv = json2csv.parse(data);
-//   res.header("Content-Type", "text/csv");
-//   res.attachment(filename);
-//   return res.send(csv);
-// };
+export async function exportStocksUtil(search) {
+  try {
+    const stockDBCRUD = new DBCRUD("userstocks");
+    await stockDBCRUD.initialize();
+    let searchQuery = {};
+    if (search) {
+      searchQuery = {
+        $or: [
+          { customerid: { $regex: search, $options: "i" } },
+          { name: { $regex: search, $options: "i" } },
+        ],
+      };
+    }
+    const stocks = await stockDBCRUD.findAll(searchQuery);
+    return {
+      statusCode: 200,
+      stocks,
+      message: "stocks found successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      statusCode: 500,
+      message: "something went wrong",
+      errors: [error.message],
+    };
+  }
+}
+
+export async function importStocksUtil(stocks) {
+  try {
+    const stockDBCRUD = new DBCRUD("userstocks");
+    await stockDBCRUD.initialize();
+    const { acknowledged, insertedIds } = await stockDBCRUD.insertMany(stocks);
+    if (acknowledged && insertedIds) {
+      return {
+        statusCode: 200,
+        stocks: Object.keys(insertedIds),
+        message: "stocks imported ",
+      };
+    } else {
+      return {
+        statusCode: 500,
+        message: "something went wrong",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      statusCode: 500,
+      message: "something went wrong",
+      errors: [error.message],
+    };
+  }
+}
